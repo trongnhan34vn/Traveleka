@@ -1,0 +1,67 @@
+footer {
+  background-color: rgba(28, 41, 48, 1);
+  padding: 56px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10rem;
+}
+
+.footer-logo img {
+  width: 80px;
+  margin-right: 14px;
+}
+
+.footer-logo-container {
+}
+
+.footer-logo-container a {
+  text-decoration: none;
+  color: #000;
+  display: block;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.footer-logo span {
+  color: #fff;
+}
+
+.footer-payment p {
+  color: #fff;
+}
+
+.footer-item h4 {
+  font-size: 16px;
+  color: #fff;
+}
+
+.footer-item-content a {
+  display: block;
+  color: #ccc;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  font-size: 14px;
+}
+
+.footer-payment-list {
+  margin: 0 -5px;
+}
+
+.footer-payment-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  padding: 10px;
+  margin: 5px;
+}
+
+.footer-payment-item img {
+  display: block;
+  margin: 0;
+}

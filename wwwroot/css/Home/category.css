@@ -1,0 +1,75 @@
+.products {
+}
+
+.category-title {
+  margin-bottom: 30px;
+}
+
+.category-destination-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.category-item {
+  margin-bottom: 60px;
+}
+
+.category-destination-item {
+  border: none;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: red;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: rgba(247, 249, 250, 1);
+  border-radius: 500px;
+}
+
+.category-destination-item__active {
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: rgba(255, 109, 112, 1);
+  border-radius: 500px;
+}
+
+/* category tours */
+.category-tours-container {
+}
+
+.category-tours-item {
+  overflow: hidden;
+}
+
+.category-tours-item img {
+  width: 248px;
+  height: 248px;
+  margin-bottom: 12px;
+  border-radius: 0.5rem;
+}
+
+.category-tours-item-content {
+  padding: 4px;
+}
+
+.category-tours-item-content h5 {
+  font-size: 16px;
+  overflow: hidden;
+  display: block;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.category-tours-item-content p {
+  font-weight: bold;
+  color: rgba(249, 109, 1, 1);
+}
+
+.category-tours-container a {
+  text-decoration: none;
+  color: black
+}

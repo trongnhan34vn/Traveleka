@@ -1,0 +1,227 @@
+@{
+
+}
+@model List<Tour_Booking.Models.Booking>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking</title>
+    <link href="~/lib/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/Home/Booking/Booking.css" rel="stylesheet" />
+    <script type="module" src="/js/User/User.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid my-5">
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <div class="card shadow-lg">
+                    <div class="row mx-auto justify-content-center text-center">
+                        <div class="col-12 mt-3">
+                            <!-- Nav -->
+                            <nav aria-label="breadcrumb" class="second">
+                                <ol class="breadcrumb indigo lighten-6 first">
+                                    <li class="breadcrumb-item font-weight-bold">
+                                        <a class="black-text text-uppercase" href="/Home"><span
+                                                class="mr-md-3 mr-1">BACK TO HOME</span></a><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                    </li>
+
+                                    <li class="breadcrumb-item font-weight-bold">
+                                        <a class="black-text text-uppercase active-2" href="#"><span
+                                                class="mr-md-3 mr-1">BOOKING</span></a>
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-around">
+                        @if (Model.Count == 0)
+                        {
+                            <div class="d-flex flex-column justify-content-center align-items-center w-100 h-100">
+                                <img style="width: 50%"
+                                    src="https://cdn.dribbble.com/users/453325/screenshots/5573953/empty_state.png"
+                                    alt="welcomeImg" />
+                                <h2>Not have any booking yet!</h2>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-5">
+                                <div class="card border-0">
+                                    <div class="card-header pb-0">
+                                        <h2 class="card-title space" style="margin-bottom: 0">
+                                            Booking
+                                        </h2>
+                                        <hr class="my-0" />
+                                    </div>
+                                    <div class="card-body" style="padding-top: 0">
+                                        <div class="row mt-4">
+                                            <div class="col">
+                                                <p class="text-muted mb-2">BOOKING LIST</p>
+                                                <hr class="mt-0" />
+                                            </div>
+                                        </div>
+                                        <div class="w-100 h-100" style="
+                                            overflow-y: auto;
+                                            overflow-x: hidden;
+                                            max-height: 350px;">
+                                            @for (var i = 0; i < Model.Count; i++)
+                                            {
+                                                <div id="booking_@i" class="bookingItem row justify-content-between"
+                                                    style="cursor: pointer;" onclick="selectBooking(@i)">
+                                                    <div class="col-auto col-md-7">
+                                                        <div class="media d-flex flex-row">
+                                                            @if (Model[i].Tour.Assets.Count != 0)
+                                                            {
+                                                                <img class="img-fluid" src="@Model[i].Tour.Assets[0].Url" width="62"
+                                                                    height="62" />
+                                                            }
+
+                                                            <div class="media-body my-auto" style="
+                                                            padding: 0.5rem;
+                                                            white-space: nowrap;
+                                                            overflow: hidden;
+                                                            text-overflow: ellipsis;">
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <p class="mb-0"><b>@Model[i].Tour.Name</b></p>
+                                                                        <small class="text-muted">@Model[i].TravelDate</small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="pl-0 flex-sm-col col-auto my-auto">
+                                                        <p><b>@Model[i].Payment $</b></p>
+                                                    </div>
+                                                </div>
+                                                <hr class="my-2" />
+                                            }
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div id="bookingDetail" class="col-md-5">
+                                <div class="card border-0">
+                                    <div class="card-header card-2">
+                                        <p class="card-text text-muted mt-md-4 mb-2 space">
+                                            YOUR DETAIL
+                                        </p>
+                                        <hr class="my-2" />
+                                    </div>
+                                    <div class="card-body pt-0">
+
+                                        <div class="form-group">
+                                            <label for="NAME" class="small text-muted mb-1">FULL NAME</label>
+                                            <p>@Model[0].CustomerName</p>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="NAME" class="small text-muted mb-1">PHONE NUMBER</label>
+                                            <p>@Model[0].PhoneNumber</p>
+                                        </div>
+
+
+                                        <p class="card-text text-muted mt-md-4 mb-2 space">
+                                            YOUR TOUR
+                                        </p>
+                                        <hr class="my-2" />
+                                        <div class="row justify-content-between">
+                                            <div class="col-auto col-md-7">
+                                                <div class="media d-flex flex-row">
+                                                    @if (Model[0].Tour.Assets.Count != 0)
+                                                    {
+                                                        <img id="tourImg" class="img-fluid" src="@Model[0].Tour.Assets[0].Url"
+                                                            width="62" height="62" />
+                                                    }
+
+                                                    <div class="media-body my-auto"
+                                                        style="
+                                                            padding: 0.5rem;
+                                                            white-space: nowrap;
+                                                            overflow: hidden;
+                                                            text-overflow: ellipsis;
+                                                                                                                                                                            ">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <p class="mb-0"><b id="tourName">@Model[0].Tour.Name</b></p>
+                                                                <small id="tourTravelDate"
+                                                                    class="text-muted">@Model[0].TravelDate</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="pl-0 flex-sm-col col-auto my-auto">
+                                                <p><b id="tourPrice">@Model[0].Tour.Price</b></p>
+                                            </div>
+                                        </div>
+                                        <hr class="my-2" />
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="row justify-content-between">
+                                                    <div class="col-4">
+                                                        <p class="mb-1"><b>Subtotal</b></p>
+                                                    </div>
+                                                    <div class="flex-sm-col col-auto">
+                                                        <p class="mb-1"><b id="bookingPayment">@Model[0].Payment $</b></p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row justify-content-between">
+                                                    <div class="col-4">
+                                                        <p><b>Total</b></p>
+                                                    </div>
+                                                    <div class="flex-sm-col col-auto">
+                                                        <p class="mb-1"><b id="bookingTotal">@Model[0].Payment $</b></p>
+                                                    </div>
+                                                </div>
+                                                <hr class="my-0" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let model = @Html.Raw(Json.Serialize(Model))
+            document.getElementById(`booking_0`).style.backgroundColor = "#e1e3e6"
+        function selectBooking(index) {
+            console.log(index)
+            let bookingItem = document.getElementsByClassName("bookingItem");
+            for (let i = 0; i < bookingItem.length; i++) {
+                if (i == index) {
+                    document.getElementById(`booking_${i}`).style.backgroundColor = "#e1e3e6"
+                } else {
+                    document.getElementById(`booking_${i}`).style.backgroundColor = "none"
+                }
+            }
+
+            document.getElementById("tourImg").src = model[index].Tour.Assets[0].Url
+            document.getElementById("tourName").innerHTML = model[index].Tour.Name
+            document.getElementById("tourTravelDate").innerHTML = model[index].TravelDate
+            document.getElementById("tourPrice").innerHTML = model[index].Tour.Price
+            document.getElementById("bookingPayment").innerHTML = model[index].Payment
+            document.getElementById("bookingTotal").innerHTML = model[index].Payment
+        }
+    </script>
+</body>
+
+</html>

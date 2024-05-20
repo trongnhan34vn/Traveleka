@@ -1,0 +1,241 @@
+@{
+    ViewData["Title"] = "Dashboard UserMng";
+    Layout = null;
+}
+@model List<Tour_Booking.Models.Booking>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Booking Mng</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="~/lib/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet" />
+
+    <!-- Custom styles for this template-->
+    <link href="~/css/Dashboard/sb-admin-2.min.css" rel="stylesheet" />
+    <style>
+        #userDropdownItems {
+            position: absolute;
+            height: 0;
+            background-color: white;
+            overflow: hidden;
+            transition-property: height;
+            transition-duration: 2s;
+        }
+
+        #userDropdown {
+            cursor: pointer;
+        }
+
+        #userDropdown:hover #userDropdownItems {
+            height: auto;
+        }
+    </style>
+    <script type="module" src="/js/Dashboard/Dashboard.js"></script>
+</head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/Dashboard/Home">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Travel</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0" />
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="/Dashboard/Home">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider" />
+
+            <!-- Nav Item - User -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/Dashboard/UserMng">
+                    <i class="fas fa-user"></i>
+                    <span>User</span></a>
+            </li>
+
+            <!-- Nav Item - Tour -->
+            <li class="nav-item">
+                <a class="nav-link" href="/Dashboard/TourMng">
+                    <i class="fas fa-plane"></i>
+                    <span>Tour</span></a>
+            </li>
+
+            <!-- Nav Item - Tour -->
+            <li class="nav-item">
+                <a class="nav-link" href="/Dashboard/AddEditTour">
+                    <i class="fas fa-pen"></i>
+                    <span>Add/Edit Tour</span></a>
+            </li>
+
+            <!-- Nav Item - Booking -->
+            <li class="nav-item">
+                <a class="nav-link" href="/Dashboard/BookingMng">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Booking</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block" />
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div class="d-flex flex-column w-100" style="overflow-x: hidden;">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li id="userDropdown" class="nav-item no-arrow">
+                            <div class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <span id="displayName" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                                <img class="img-profile rounded-circle"
+                                    src="https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png?ssl=1" />
+                            </div>
+                            <!-- Dropdown - User Information -->
+                            <div id="userDropdownItems" class="shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <p id="profileBtn" class="dropdown-item">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </p>
+                                <div class="dropdown-divider"></div>
+                                <p id="signOutBtn" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Sign Out
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">User Management</h1>
+                        <div>
+                            @* Search form *@
+                            <form method="get" class="d-flex align-items-center">
+                                <div class="mr-1">
+                                    <input type="text" class="form-control bg-light border-0 small"
+                                        placeholder="Search for..." name="search" />
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary" type="submit" asp-controller="Dashboard"
+                                        asp-action="BookingMng">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+                @if (Model.Count == 0)
+                {
+                    <div class="d-flex justify-content-center align-items-center mw-25">
+                        <img class="mw-10 rounded-lg" style="width: 50%"
+                            src="https://cdn.dribbble.com/users/453325/screenshots/5573953/empty_state.png"
+                            alt="welcomeImg" />
+                    </div>
+                }
+                else
+                {
+                    <div class="container-fluid">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary"></h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Tour name</th>
+                                                <th>Customer</th>
+                                                <th>Phone</th>
+                                                <th>Travel date</th>
+                                                <th>Payment</th>
+                                                <th>Created date</th>
+                                            </tr>
+                                        </thead>
+                                        @if (Model.Count >= 10)
+                                        {
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Tour name</th>
+                                                    <th>Customer</th>
+                                                    <th>Phone</th>
+                                                    <th>Travel date</th>
+                                                    <th>Payment</th>
+                                                    <th>Created date</th>
+                                                </tr>
+                                            </tfoot>
+                                        }
+
+                                        <tbody>
+                                            @foreach (var booking in Model)
+                                            {
+                                                <tr>
+                                                    <td>@booking.Tour.Name</td>
+                                                    <td>@booking.CustomerName</td>
+                                                    <td>@booking.PhoneNumber</td>
+                                                    <td>@booking.TravelDate</td>
+                                                    <td>@booking.Payment</td>
+                                                    <td>@booking.CreatedDate</td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <!-- End of Main Content -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+</body>
+
+</html>

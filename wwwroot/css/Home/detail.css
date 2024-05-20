@@ -1,0 +1,134 @@
+.detail {
+  background-image: url("https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/b/b4538470b37dc54108c59d3f59c8a348.svg"),
+    url("https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/9/9e53a3b8e03225c35c727b1787b12c1d.svg"),
+    linear-gradient(
+      90deg,
+      rgba(9, 97, 185, 1) 30%,
+      rgba(46, 150, 222, 1) calc(100% - 522px),
+      transparent calc(100% - 510px),
+      transparent 100%
+    );
+  height: 100%;
+  width: 100%;
+  background-size: auto, auto, 100% 281px;
+  background-position: left -80px, right -80px, left top;
+  background-repeat: no-repeat;
+  min-width: 960px;
+}
+
+.detail-title h2 {
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.detail-title p {
+  color: #fff;
+}
+
+.detail-title p i {
+  margin-right: 4px;
+}
+
+.detail-title__bold {
+  font-weight: bold;
+}
+
+.detail-title {
+  padding-top: 72px;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.detail-title-time-container {
+  display: flex;
+  gap: 20px;
+}
+
+.detail-images {
+  height: 100%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 0 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.detail-images-left {
+  width: 50%;
+}
+
+.detail-images-left img {
+  display: block;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+}
+
+.detail-images-right img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.detail-images-right {
+  height: 100%;
+  width: 50%;
+}
+
+.detail-images-right .row {
+  margin-bottom: 20px;
+}
+
+.detail-description {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+}
+.detail-description-container {
+  flex: 1;
+}
+
+.detail-description-container h5 {
+  color: rgba(2, 100, 200, 1);
+  margin-bottom: 20px;
+}
+
+.detail-description-container p {
+  text-align: justify;
+}
+
+.detail-description-item {
+  background-color: rgba(247, 249, 250, 1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.detail-description-price-container {
+  padding: 20px;
+  background-color: rgba(255, 244, 239, 1);
+  display: flex;
+  gap: 20px;
+  color: rgba(255, 94, 31, 1);
+}
+
+.detail-description-price-container p {
+  margin-bottom: 5px;
+}
+
+.detail-description-price-container-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-description-price-container-submit-btn {
+  background-color: rgba(255, 94, 31, 1) !important;
+  color: #fff !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.detail-description-price-container-submit-btn:hover {
+  opacity: 0.8;
+}

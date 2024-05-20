@@ -1,0 +1,259 @@
+@{
+    var errorMessage = TempData["ErrorMessage"];
+	var successMessage = TempData["SuccessMessage"];
+}
+@model Tour_Booking.Models.User
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="~/css/User/Profile.css">
+    <style>
+        .navHover:hover {
+            cursor: pointer;
+            scale: 120%;
+        }
+
+        .activeNav {
+            scale: 120%;
+        }
+    </style>
+    <script type="module" src="/js/User/User.js"></script>
+</head>
+
+<body>
+   
+	@if(errorMessage != null){
+        <h6 id="error_message" hidden>@errorMessage</h6>
+    }  
+	@if(successMessage != null){
+        <h6 id="success_message" hidden>@successMessage</h6>
+    } 
+    <section class="vh-100" style="background-color: #f4f5f7;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-lg-6 mb-4 mb-lg-0" style="width: 80%; height: 80%;">
+                    <div class="card mb-3" style="border-radius: .5rem; height: 100%;">
+                        <div class="row g-0" style="height: 100%; overflow: hidden;">
+                            <div class="col-md-4 gradient-custom text-center text-white d-flex justify-content-center align-items-center  flex-column"
+                                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                                <img src="https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png?ssl=1"
+                                    alt="Avatar" class="img-fluid my-5 rounded-circle" style="width: 80%;" />
+                                <div class="w-100 d-flex flex-column">
+                                    <div id="navInfomation" class="navHover activeNav">
+                                        <p>Infomation</p>
+                                    </div>
+                                    <div id="navChangePassword" class="navHover">
+                                        <p>Change password</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8">
+                                @* Change fullname phonenumber form *@
+                                <form id="formInfomation" class="card-body p-4" style="display: block;" method="post">
+                                <h6>Information</h6>
+                                <hr class="mt-0 mb-4">
+                                <div class="row pt-1">
+                                <div class="col-6 mb-3">
+                                <h6>Fullname</h6>
+                                <input id="fullNameInput" type="text" class="text-muted bg-white"
+                                style="border: none; border-radius: 5px" value="@Model.FullName" disabled asp-for="FullName" required>
+                                </div>
+                                <div class="col-6 mb-3">
+                                <h6>Phone</h6>
+                                <input id="phoneNumberInput" type="text"
+                                class="text-muted bg-white" style="border: none; border-radius: 5px"
+                                value="@Model.PhoneNumber" disabled asp-for="PhoneNumber" required minlength="10" maxlength="10">
+                                </div>
+                                <input type="text" value="@Model.Id" hidden asp-for="Id">
+                                </div>
+                                <h6>Booking</h6>
+                                <hr class="mt-0 mb-4">
+                                <div class="row pt-1">
+                                <div class="col-6 mb-3">
+                                <h6>Processed</h6>
+                                <p class="text-muted">5</p>
+                                </div>
+                                <div class="col-6 mb-3">
+                                <h6>Processing</h6>
+                                <p class="text-muted">6</p>
+                                </div>
+                                </div>
+                                <div id="editBtnBlock" style="display: block;">
+                                <div class="w-100 d-flex justify-content-end align-items-center">
+                                <button type="button" onclick="editButton()"
+                                class="btn gradient-custom rounded-fill border-0">Edit</button>
+                                </div>
+                                </div>
+                                <div id="formBtnBlock" style="display: none !important;">
+                                <div class="w-100 d-flex justify-content-end align-items-center">
+                                <button id="saveFormInfomationBtn" type="submit" class="btn gradient-custom rounded-fill border-0"
+                                style="margin-right: 1rem;" asp-controller="User" asp-action="Profile" 
+                                onclick="submitFormInfomation(event)"
+                                >Save</button>
+                                <button type="button"
+                                class="btn btn-secondary rounded-fill border-0 text-white"
+                                onclick="cancelButton()">Cancel</button>
+                                </div>
+                                </div>
+
+                                </form>
+                                @* Change Password form *@
+                                <form id="formChangePassword" class="card-body p-4" style="display: none;" method="post">
+                                    <h6>Change Password</h6>
+                                    <hr class="mt-0 mb-4">
+                                    <div class="row pt-1">
+                                        <div class="col-12 mb-3">
+                                            <h6>Current password:</h6>
+                                            <p id="currentPassword" hidden>@Model.Password</p>
+                                            <input id="currentPasswordInput" type="text" class="text-muted bg-white"
+                                                style="border: 1px solid grey; border-radius: 5px">
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <h6>New password:</h6>
+                                            <input id="newPasswordInput" type="text" class="text-muted bg-white"
+                                                style="border: 1px solid grey; border-radius: 5px">
+                                        </div>
+                                        <input id="currentUserId" type="text" value="@Model.Id" hidden asp-for="Id">
+                                    </div>
+                                    <div>
+                                        <div class="w-100 d-flex justify-content-end align-items-center">
+                                            <button type="submit"
+                                                class="btn gradient-custom rounded-fill border-0" asp-controller="User" asp-action="Profile"
+                                                onclick="submitFormChangePassword(event)"
+                                                >Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        let fullNameInputCurrentValue;
+        let phoneNumberInputCurrentValue;
+        function editButton() {
+            let editBtnBlock = document.getElementById("editBtnBlock");
+            let formBtnBlock = document.getElementById("formBtnBlock");
+            let fullNameInput = document.getElementById("fullNameInput");
+            let phoneNumberInput = document.getElementById("phoneNumberInput");
+            fullNameInputCurrentValue = fullNameInput.value;
+            phoneNumberInputCurrentValue = phoneNumberInput.value;
+            editBtnBlock.style.display = "none";
+            formBtnBlock.style.display = "block"
+            fullNameInput.disabled = false;
+            fullNameInput.style.border = "1px solid grey"
+            phoneNumberInput.disabled = false;
+            phoneNumberInput.style.border = "1px solid grey"
+        }
+
+        function cancelButton() {
+            let editBtnBlock = document.getElementById("editBtnBlock");
+            let formBtnBlock = document.getElementById("formBtnBlock");
+            let fullNameInput = document.getElementById("fullNameInput");
+            let phoneNumberInput = document.getElementById("phoneNumberInput");
+            editBtnBlock.style.display = "block";
+            formBtnBlock.style.display = "none"
+            fullNameInput.disabled = true;
+            fullNameInput.style.border = "none"
+            phoneNumberInput.disabled = true;
+            phoneNumberInput.style.border = "none"
+            if(fullNameInputCurrentValue) {
+            fullNameInput.value = fullNameInputCurrentValue;
+            }
+            if(phoneNumberInputCurrentValue){
+            phoneNumberInput.value = phoneNumberInputCurrentValue;
+            }
+        }
+        
+        let navInfomation = document.getElementById("navInfomation");
+        let navChangePassword = document.getElementById("navChangePassword");
+
+        navInfomation.addEventListener("click", e => {
+        navInfomation.classList.add("activeNav");
+        navChangePassword.classList.remove("activeNav")
+        document.getElementById("formInfomation").style.display = "block"
+        document.getElementById("formChangePassword").style.display = "none"
+        })
+        
+        navChangePassword.addEventListener("click", e => {
+        navChangePassword.classList.add("activeNav");
+        navInfomation.classList.remove("activeNav")
+        document.getElementById("formChangePassword").style.display = "block"
+        document.getElementById("formInfomation").style.display = "none"
+        cancelButton()
+        })
+
+        
+        function submitFormInfomation(e){
+            e.preventDefault();
+            let fullNameInput = document.getElementById("fullNameInput");
+            let phoneNumberInput = document.getElementById("phoneNumberInput");
+            if (fullNameInput.value.trim() != fullNameInputCurrentValue || phoneNumberInput.value.trim() != phoneNumberInputCurrentValue){
+                document.getElementById("formInfomation").submit();
+            }
+        }
+
+        function submitFormChangePassword(e) {
+            e.preventDefault();
+            let currentPassword = document.getElementById("currentPassword").innerHTML;
+            let currentPasswordInput = document.getElementById("currentPasswordInput").value;
+            let newPasswordInput = document.getElementById("newPasswordInput").value;
+            if (currentPasswordInput.trim() != currentPassword) {
+                Swal.fire({
+  			    position: "center",
+  			    icon: "error",
+  			    title: "Wrong Current Password",
+  			    showConfirmButton: false,
+  			    timer: 2000
+		        });
+            }
+            
+            if (currentPasswordInput.trim() == newPasswordInput.trim()) {
+                Swal.fire({
+  			    position: "center",
+  			    icon: "error",
+  			    title: "Current password and new password are the same!",
+  			    showConfirmButton: false,
+  			    timer: 2000
+		        });
+            }
+
+            document.getElementById("formChangePassword").submit()
+
+        }
+
+
+        let error_message = document.getElementById("error_message");
+		let success_message = document.getElementById("success_message");
+        if (success_message) {
+            let model = @Html.Raw(Json.Serialize(Model))
+            let currentUser = {
+                Id: model.Id,
+                FullName: model.FullName,
+                PhoneNumber: model.PhoneNumber
+            }
+            localStorage.setItem("currentUser", JSON.stringify(currentUser));
+        }
+		if(error_message || success_message){
+			Swal.fire({
+  			position: "center",
+  			icon: `${error_message ? "error" : "success"}`,
+  			title: `${error_message ? error_message.innerHTML : success_message.innerHTML}`,
+  			showConfirmButton: false,
+  			timer: 2000
+		});
+		}
+
+
+    </script>
+</body>
+
+</html>

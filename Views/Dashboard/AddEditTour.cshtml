@@ -1,0 +1,283 @@
+@{
+    Layout = null;
+}
+@model Tour_Booking.Models.AddEditFormModel
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Dashboard AddEditTour</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="~/lib/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet" />
+
+    <!-- Custom styles for this template-->
+    <link href="~/css/Dashboard/sb-admin-2.min.css" rel="stylesheet" />
+    <style>
+        #resetImage:hover {
+            color: #4e73de;
+            font: bold;
+        }
+           #userDropdownItems {
+            position: absolute;
+            height: 0;
+            background-color: white;
+            overflow: hidden;
+            transition-property: height;
+            transition-duration: 2s;
+        }
+
+        #userDropdown {
+            cursor: pointer;
+        }
+
+        #userDropdown:hover #userDropdownItems {
+            height: auto;
+        }
+    </style>
+    <script type="module" src="/js/Dashboard/Dashboard.js"></script>
+</head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/Dashboard/Home">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Travel</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0" />
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="/Dashboard/Home">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider" />
+
+            <!-- Nav Item - User -->
+            <li class="nav-item">
+                <a class="nav-link" href="/Dashboard/UserMng">
+                    <i class="fas fa-user"></i>
+                    <span>User</span></a>
+            </li>
+
+            <!-- Nav Item - Tour -->
+            <li class="nav-item">
+                <a class="nav-link" href="/Dashboard/TourMng">
+                    <i class="fas fa-plane"></i>
+                    <span>Tour</span></a>
+            </li>
+
+            <!-- Nav Item - Tour -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/Dashboard/AddEditTour">
+                    <i class="fas fa-pen"></i>
+                    <span>Add/Edit Tour</span></a>
+            </li>
+
+            <!-- Nav Item - Booking -->
+            <li class="nav-item">
+                <a class="nav-link" href="/Dashboard/BookingMng">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Booking</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block" />
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div class="d-flex flex-column w-100" style="overflow-x: hidden;">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                       
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                         <li id="userDropdown" class="nav-item no-arrow">
+                            <div class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <span id="displayName" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                                <img class="img-profile rounded-circle"
+                                    src="https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png?ssl=1" />
+                            </div>
+                            <!-- Dropdown - User Information -->
+                            <div id="userDropdownItems" class="shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <p id="profileBtn" class="dropdown-item">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </p>
+                                <div class="dropdown-divider"></div>
+                                <p id="signOutBtn" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Sign Out
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Add & Edit Tour</h1>
+                    </div>
+                    @* Add Edit Tour Content*@
+                    <hr class="sidebar-divider my-0" />
+                    <form method="post" enctype="multipart/form-data" class="row w-100 h-100 mt-3"
+                        style="overflow-y: auto">
+                        <!-- Name -->
+                        <div class="w-100 col-12 mt-3 p-0">
+                            <h6>Tour name:</h6>
+                            <input type="text" placeholder="Name..." required style="font-size: 13px; width: 80%"
+                                asp-for="Name" value="@Model.Name"/>
+                        </div>
+                        <!-- Content Block -->
+                        <div class="row col-12 w-100 mt-3">
+                            <!-- Duration -->
+                            <div class="w-100 col-4 p-0">
+                                <h6>Duration:</h6>
+                                <input type="number" placeholder="Duration..." required class="w-75"
+                                    style="font-size: 13px" asp-for="Duration" />
+                            </div>
+                            <!-- Price -->
+                            <div class="w-100 col-4 p-0">
+                                <h6>Price:</h6>
+                                <input type="text" placeholder="Price..." required class="w-75" style="font-size: 13px"
+                                    asp-for="Price" />
+                            </div>
+                            <!-- Destination -->
+                            <div class="w-100 col-4 p-0">
+                                <h6>Destination:</h6>
+                                <select class="form-select p-1" aria-label="Default select example"
+                                    style="font-size: 13px; color: #858796" asp-for="DestinationId">
+
+                                    @if (Model.Destinations != null)
+                                    {
+                                        foreach (var destination in Model.Destinations)
+                                        {
+                                            <option value="@destination.Id">@destination.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        @* IFrame *@
+                        <div class="w-100 col-12 mt-3 p-0">
+                            <h6>IFrame:</h6>
+                            <input type="text" placeholder="IFrame..." required style="font-size: 13px; width: 80%"
+                                asp-for="Iframe" />
+                        </div>
+                        <!-- Description & Image-->
+                        <div class="w-100 row col-12 mt-3 p-0">
+                            <!-- Description -->
+                            <div class="col-10">
+                                <h6>Description:</h6>
+                                <textarea name="description" id="description" style="
+                                    width: 95%;
+                                    font-size: 13px;
+                                    color: #858796;
+                                    resize: none;" rows="8" asp-for="Description"></textarea>
+                            </div>
+                            <!-- Image -->
+                            <div class="col-2 d-flex flex-column justify-content-center text-center"
+                                style="position: relative">
+                                <h6>Image</h6>
+                                <img src="https://static-00.iconduck.com/assets.00/cloud-upload-icon-1024x731-411jx08j.png"
+                                    alt="" class="w-100" />
+                                <input id="inputImage" type="file" accept="image/*" class="w-100" style="
+                                    position: absolute;
+                                    cursor: pointer;
+                                    opacity: 0;
+                                    height: 70%;" multiple asp-for="Files" />
+                                <div>
+                                    <p id="numberOfFile">0 file</p>
+                                </div>
+                                <div style="height: 10%; width: 100%" class="d-flex justify-content-center">
+                                    <p style="cursor: pointer" id="resetImage">Reset</p>
+                                </div>
+                            </div>
+                        </div>
+                        @* Schedule *@
+                        <div class="w-100 row col-12 mt-3 p-0">
+                            <div class="col-10">
+                                <h6>Shedule:</h6>
+                                <textarea name="schedule" id="schedule" style="
+                                    width: 95%;
+                                    font-size: 13px;
+                                    color: #858796;
+                                    resize: none;" rows="8" asp-for="Schedule"></textarea>
+                            </div>
+                        </div>
+                        @* Form *@
+                        <input type="text" placeholder="Action..." style="font-size: 13px; width: 80%"
+                            asp-for="Action" value="@Model.Action" hidden/>
+                        @if (Model.Action == "edit") {
+                            <input type="text" style="font-size: 13px; width: 80%"
+                            asp-for="TourId" value="@Model.TourId" hidden/>
+                        }   
+                        <div class="w-100 mt-1 mb-2">
+                            <button type="submit" class="btn btn-primary" style="font-size: 13px; width: 30%"
+                                asp-controller="Dashboard" asp-action="AddEditTour">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <script>
+        let inputImage = document.getElementById("inputImage");
+
+        inputImage.addEventListener("change", e => {
+            document.getElementById("numberOfFile").innerHTML = e.target.files.length + " Files"
+        })
+        document.getElementById("resetImage").addEventListener("click", e => {
+            inputImage.value = "";
+            document.getElementById("numberOfFile").innerHTML = "0 Files";
+        })
+        @* function resetInputFile() {
+            inputImage.value =  "";
+            } *@
+    </script>
+</body>
+
+</html>

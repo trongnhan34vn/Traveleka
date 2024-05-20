@@ -1,0 +1,235 @@
+@{
+
+}
+@model Tour_Booking.Models.BookingFormModel
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link href="~/css/Home/Booking/Booking.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/Home/navbar.css">
+    <link rel="stylesheet" href="~/css/Home/slider.css">
+    <link rel="stylesheet" href="~/css/Home/category.css">
+    <link rel="stylesheet" href="~/css/Home/booking.css">
+    <link rel="stylesheet" href="~/css/Home/footer.css">
+    <link rel="stylesheet" href="~/css/Home/maps.css">
+    <link rel="stylesheet" href="~/css/Home/detail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+    <form style="margin-top: 145px !important" method="post" class="container-fluid my-5">
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <div class="card shadow-lg">
+                    <div class="row mx-auto justify-content-center text-center">
+                        <div class="col-12 mt-3">
+                            <!-- Nav -->
+                            @* <nav aria-label="breadcrumb" class="second">
+                                <ol class="breadcrumb indigo lighten-6 first">
+                                    <li class="breadcrumb-item font-weight-bold">
+                                        <a class="black-text text-uppercase" href="#"><span class="mr-md-3 mr-1">BACK TO
+                                                HOME</span></a><i class="fa fa-angle-double-right"
+                                            aria-hidden="true"></i>
+                                    </li>
+
+                                    <li class="breadcrumb-item font-weight-bold">
+                                        <a class="black-text text-uppercase active-2" href="#"><span
+                                                class="mr-md-3 mr-1">BOOKING</span></a>
+                                    </li>
+                                </ol>
+                            </nav> *@
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-around">
+                        <div class="col-md-5">
+                            <div class="card border-0">
+                                <div class="card-header pb-0">
+                                    <h2 class="card-title space" style="margin-bottom: 0">
+                                        Booking
+                                    </h2>
+                                    <hr class="my-0" />
+                                </div>
+                                <div class="card-body" style="padding-top: 0">
+                                    <div class="row mt-4">
+                                        <div class="col">
+                                            <p class="text-muted mb-2">PAYMENT DETAILS</p>
+                                            <hr class="mt-0" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="NAME" class="small text-muted mb-1">NAME ON CARD</label>
+                                        <input type="text" class="form-control form-control-sm" name="nameOnCard"
+                                            id="nameOnCard" aria-describedby="helpId" placeholder="Name on card..."
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="NAME" class="small text-muted mb-1">CARD NUMBER</label>
+                                        <input type="text" class="form-control form-control-sm" name="cardNumber"
+                                            id="cardNumber" aria-describedby="helpId" placeholder="4534 5555 5555 5555"
+                                            required />
+                                    </div>
+                                    <div class="row no-gutters">
+                                        <div class="col-sm-6 pr-sm-2">
+                                            <div class="form-group">
+                                                <label for="NAME" class="small text-muted mb-1">VALID THROUGH</label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    name="validThrough" id="validThrough" aria-describedby="helpId"
+                                                    placeholder="06/21" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="NAME" class="small text-muted mb-1">CVC CODE</label>
+                                                <input type="text" class="form-control form-control-sm" name="cvcCode"
+                                                    id="cvcCode" aria-describedby="helpId" placeholder="183" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-md-5">
+                                        <div class="col">
+                                            <button type="submit" name="" id="" class="btn btn-lg btn-block"
+                                                style="margin-top: 10px; width: 100%;" asp-controller="Home"
+                                                asp-action="Booking">
+                                                PURCHASE $37 SEK
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order -->
+                        <div class="col-md-5">
+                            <div class="card border-0">
+                                <div class="card-header card-2">
+                                    <p class="card-text text-muted mt-md-4 mb-2 space">
+                                        YOUR DETAIL
+                                    </p>
+                                    <hr class="my-2" />
+                                </div>
+                                <div class="card-body pt-0">
+                                    <div class="row justify-content-between">
+                                        <!-- Booking Options -->
+                                        <div class="col-12 d-flex align-items-center mt-0">
+                                            <label class="switch">
+                                                <input id="bookingOptionCheckbox" type="checkbox" />
+                                                <span class="slider round"></span>
+                                            </label>
+                                            <p style="padding-top: 1rem; padding-left: 0.5rem;">
+                                                <b>Booking for another person</b>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- Input Detail -->
+                                    <!-- Name -->
+                                    <div class="form-group">
+                                        <label for="CustomerName" class="small text-muted mb-1">FULL NAME</label>
+                                        <input type="text" class="form-control form-control-sm" name="CustomerName"
+                                            id="CustomerName" aria-describedby="helpId" placeholder="Full name..."
+                                            asp-for="CustomerName" />
+                                    </div>
+                                    <!-- Phone Number -->
+                                    <div class="form-group">
+                                        <label for="PhoneNumber" class="small text-muted mb-1">PHONE NUMBER</label>
+                                        <input type="text" class="form-control form-control-sm" name="PhoneNumber"
+                                            id="PhoneNumber" aria-describedby="helpId" placeholder="Phone number..."
+                                            asp-for="PhoneNumber" />
+                                    </div>
+
+                                    <!-- Order -->
+                                    <p class="card-text text-muted mt-md-4 mb-2 space">
+                                        YOUR TOUR
+                                    </p>
+                                    <hr class="my-2" />
+                                    <div class="row justify-content-between">
+                                        <div class="col-auto col-md-7">
+                                            <div class="media d-flex flex-sm-row">
+                                                <img class="img-fluid" src="https://i.imgur.com/6oHix28.jpg" width="62"
+                                                    height="62" />
+                                                <div class="media-body my-auto">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <p class="mb-0"><b>EC-GO Bag Standard</b></p>
+                                                            <small class="text-muted">2024/05/19</small>
+                                                            <input type="datetime" value="2024/05/19"
+                                                                asp-for="TravelDate" hidden>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="pl-0 flex-sm-col col-auto my-auto">
+                                            <p><b>179 SEK</b></p>
+                                        </div>
+                                    </div>
+                                    <hr class="my-2" />
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="row justify-content-between">
+                                                <div class="col-4">
+                                                    <p class="mb-1"><b>Subtotal</b></p>
+                                                </div>
+                                                <div class="flex-sm-col col-auto">
+                                                    <p class="mb-1"><b>0 $</b></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row justify-content-between">
+                                                <div class="col-4">
+                                                    <p><b>Total</b></p>
+                                                </div>
+                                                <div class="flex-sm-col col-auto">
+                                                    <p class="mb-1"><b>537 $</b></p>
+                                                    <input type="number" value="537" hidden asp-for="Payment">
+                                                </div>
+                                            </div>
+                                            <hr class="my-0" />
+                                            <input type="text" value="EAC035D5-322E-408A-8A19-08DC724E2534" hidden
+                                                asp-for="UserId">
+                                            <input type="text" value="24838F5E-F55C-457C-A3FA-449514AD7789" hidden
+                                                asp-for="TourId">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        let bookingOptionCheckbox = document.getElementById("bookingOptionCheckbox");
+        let customerName = document.getElementById("CustomerName")
+        let phoneNumber = document.getElementById("PhoneNumber")
+        bookingOptionCheckbox.addEventListener("change", (e) => {
+            let checkboxState = e.target.checked;
+            if (checkboxState) {
+                customerName.value = "";
+                phoneNumber.value = "";
+            } else {
+                let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+                customerName.value = currentUser.FullName;
+                phoneNumber.value = currentUser.phoneNumber;
+            }
+        })
+    </script>
+</body>
+
+</html>

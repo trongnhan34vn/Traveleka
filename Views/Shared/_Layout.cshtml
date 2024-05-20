@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Tour_Booking</title>
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
+    @* <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
+    @* <link rel="stylesheet" href="~/Tour_Booking.styles.css" asp-append-version="true" /> *@
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid nav-container">
+                <!-- logo -->
+                <div class="nav-logo-container">
+                    <a class="nav-logo" href="/">
+                        <img src="~/assets/const_img/logo.png" alt="">
+                        <span class="">Travalel</span>
+                    </a>
+                </div>
+                <div class="" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active nav-item nav-item__discount" aria-current="page" href="#">
+                            <i class="fa-solid fa-percent"></i>
+                            <span>Khuyến mãi</span>
+                        </a>
+                        <a class="nav-link nav-item" href="#">Hợp tác với chúng tôi</a>
+                        <a class="nav-link nav-item" href="#">Đặt chỗ của tôi</a>
+                        <a href="/User/Member?action=SignIn" class="btn btn-outline-primary nav-item">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Đăng nhập</span>
+                        </a>
+                        <a href="/User/Member?action=SignUp" class="btn btn-primary">Đăng kí</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-route-container nav-container">
+                <div class="nav-route-container-list">
+                    <a class="nav-route-item" href="">Tất cả</a>
+                    <a class="nav-route-item" href="">Tour bán chạy</a>
+                    <a class="nav-route-item" href="">Tour nội địa</a>
+                    <a class="nav-route-item" href="">Tour nước ngoài</a>
+                </div>
+
+            </div>
+        </nav>
+        <!-- Navbar -->
+    </header>
+    <div class="">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo-container">
+                <!-- logo -->
+                <a class="footer-logo" href="/">
+                    <img src="/assets/const_img/logo.png" alt="">
+                    <span class="">Travalel</span>
+                </a>
+                <!-- payment -->
+                <div class="footer-payment">
+                    <p>Đối tác thanh toán</p>
+                    <div class="row footer-payment-list">
+                        <div class="col-2 footer-payment-item">
+                            <img src="~/assets/const_img/master-card.webp" alt="">
+                        </div>
+                        <div class="col-2 footer-payment-item">
+                            <img src="~/assets/const_img/master-card.webp" alt="">
+                        </div>
+                        <div class="col-2 footer-payment-item">
+                            <img src="~/assets/const_img/master-card.webp" alt="">
+                        </div>
+                        <div class="col-2 footer-payment-item">
+                            <img src="~/assets/const_img/master-card.webp" alt="">
+                        </div>
+                    </div>
+
+                    <div class="row footer-payment-list">
+                        <div class="col-2 footer-payment-item">
+                            <img src="~/assets/const_img/master-card.webp" alt="">
+                        </div>
+                        <div class="col-2 footer-payment-item">
+                            <img src="~/assets/const_img/master-card.webp" alt="">
+                        </div>
+                        <div class="col-2 footer-payment-item">
+                            <img src="~/assets/const_img/master-card.webp" alt="">
+                        </div>
+                        <div class="col-2 footer-payment-item">
+                            <img src="~/assets/const_img/master-card.webp" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-item">
+                <h4>Về Traveloka</h4>
+                <div class="footer-item-content">
+                    <a href="">Cách đặt chỗ</a>
+                    <a href="">Liên hệ chúng tôi</a>
+                    <a href="">Trợ giúp</a>
+                    <a href="">Tuyển dụng</a>
+                </div>
+            </div>
+            <div class="footer-item">
+                <h4>Sản phẩm</h4>
+                <div class="footer-item-content">
+                    <a href="">Khách sạn</a>
+                    <a href="">Vé máy bay</a>
+                    <a href="">Vé xe khách</a>
+                    <a href="">Đưa đón máy bay</a>
+                </div>
+            </div>
+            <div class="footer-item">
+                <h4>Khác</h4>
+                <div class="footer-item-content">
+                    <a href="">Cách đặt chỗ</a>
+                    <a href="">Liên hệ chúng tôi</a>
+                    <a href="">Trợ giúp</a>
+                    <a href="">Tuyển dụng</a>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- Footer -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
