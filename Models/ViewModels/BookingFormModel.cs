@@ -8,4 +8,5 @@ public class BookingFormModel
     public string? PhoneNumber { get; set; }
     public DateTime TravelDate { get; set; }
     public double Payment { get; set; }
+    public Tour? Tour { get; set; }
 }

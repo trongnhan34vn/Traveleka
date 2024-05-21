@@ -66,3 +66,10 @@ export function profilePageRoute() {
     location.href = `/User/Profile/${JSON.parse(currentUser).Id}`;
   }
 }
+
+export function bookingListPageRoute() {
+  let currentUser = localStorage.getItem("currentUser");
+  if (currentUser) {
+    location.href = `/User/BookingList/${JSON.parse(currentUser).Id}`;
+  }
+}

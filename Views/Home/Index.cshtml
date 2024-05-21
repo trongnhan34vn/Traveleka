@@ -3,6 +3,8 @@
     var request = Context.Request;
     var path = request.Path;
     var queryString = request.QueryString;
+    var successMessage = TempData["SuccessMessage"];
+    var currentUserJson = TempData["CurrentUserJson"];
     @* var currentUrl = $"{request.Scheme}://{request.Host}{request.Path}{request.QueryString}"; *@
 }
 
@@ -35,33 +37,66 @@
 </head>
 
 <body>
+    @if (successMessage != null)
+    {
+        <h6 id="success_message" hidden>@successMessage</h6>
+    }
+    @if (currentUserJson != null)
+    {
+        <h6 id="currentUserJson" hidden>@currentUserJson</h6>
+    }
     <!-- Slider -->
     <section class="slider container">
         <div style="background-image: url('/assets/const_img/slider.webp')" class="slider-img"></div>
-        <div class="slider-search-container">
+        <form method="get" class="slider-search-container">
             <div class="input-group slider-search">
                 <span class="input-group-text" id="inputGroup-sizing-default">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </span>
-                <input type="text" class="form-control" aria-label="Sizing example input"
+                <input name="search" type="text" class="form-control" aria-label="Sizing example input"
                     placeholder="Bạn có ý tưởng gì cho chuyến đi tiếp theo?"
                     aria-describedby="inputGroup-sizing-default">
             </div>
-            <button class="btn btn-primary slider-btn">Tìm kiếm</button>
-        </div>
+            <button asp-controller="Home" asp-action="Index" type="submit" class="btn btn-primary slider-btn">Tìm kiếm</button>
+        </form>
 
     </section>
     <!-- Slider -->
 
     <!-- Category -->
     <section class="container">
-        <!-- item -->
+
+        @* Action Handle *@
+        @if (Model.Action != null){
+             <div class="category-item">
+                <div class="category-title">
+                    <h3 id="titleAction"></h3>
+                </div>
+            <div class="row category-tours-container">
+                @if (Model.OrderTours == null) return;
+                @foreach (var tour in Model.OrderTours)
+                {
+                    @if (tour.Assets.Count > 0) {
+                        <a asp-controller="Home" asp-action="Detail" asp-route-id="@tour.Id" class="col-3 category-tours-item">
+                        <img style="width: 100%" src="@tour.Assets[1].Url"
+                            alt="">
+                        <div class="category-tours-item-content">
+                            <h5 style="height: 40px;">@tour.Name</h5>
+                            <p>@string.Format("{0:C}", tour.Price)</p>
+                        </div>
+                    </a>
+                    }
+                }
+            </div>
+             </div>
+        } else {
+        @* item  *@
         <div class="category-item">
-            <!-- title -->
+             @* title  *@
             <div class="category-title">
                 <h3>Các Tour bán chạy</h3>
             </div>
-            <!-- destination -->
+             @* destination *@
             <div class="category-destination-container">
                 @if (Model.interiorDestinations == null) return;
                 @foreach (var destination in Model.interiorDestinations)
@@ -101,7 +136,7 @@
                 }
             
             </div>
-            <!-- tours -->
+            @* tours *@
             <div class="row category-tours-container">
                 @if (Model.mostBookingInteriorTours == null) return;
                 @foreach (var tour in Model.mostBookingInteriorTours)
@@ -120,13 +155,13 @@
             </div>
         </div>
 
-        <!-- item -->
+        @* item *@
         <div class="category-item">
-            <!-- title -->
+           @* title *@
             <div class="category-title">
                 <h3>Du lịch khắp thế giới</h3>
             </div>
-            <!-- destination -->
+             @* destination  *@
             @* <div class="category-destination-container">
       @if (Model.aboardDestinations == null) return;
                 @foreach (var destination in Model.aboardDestinations)
@@ -145,7 +180,7 @@
 
                 }
             </div> *@
-            <!-- tours -->
+           @* tours  *@
             <div class="row category-tours-container">
                 @if (Model.aboardTours == null) return;
                 @foreach (var tour in Model.aboardTours)
@@ -166,7 +201,7 @@
             </div>
         </div>
 
-        <!-- item -->
+         @* item  *@
         @* <div class="category-item">
             <!-- title -->
             <div class="category-title">
@@ -227,10 +262,60 @@
                 </div>
             </div>
         </div> *@
+        }
+
+
+        
     </section>
     <!-- Category -->
 
     <script>
+
+        let success_message = document.getElementById("success_message");
+
+        if (success_message) {
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: `${success_message.innerHTML}`,
+                showConfirmButton: false,
+                timer: 2000
+            });
+        }
+        let currentUserJson = document.getElementById("currentUserJson");
+        if (currentUserJson) {
+            console.log(currentUserJson);
+            localStorage.setItem("currentUser", currentUserJson.innerHTML)
+        }
+
+        let model = @Html.Raw(Json.Serialize(Model));
+        let actionArr = [
+        {
+            action: "MBT",
+            title: "Tour bán chạy"
+        },
+        {
+            action: "IT",
+            title: "Tour nội địa"
+        },
+        {
+            action: "AT",
+            title: "Tour nước ngoài"
+        },
+        {
+            action: "search",
+            title: "Kết quả tìm kiếm"
+        }
+        ]
+        if(model.action != null){
+            for (let i = 0; i < actionArr.length; i++) {
+                if(actionArr[i].action == model.action){
+                     document.getElementById("titleAction").innerHTML = actionArr[i].title;
+                }
+            }
+        }
+       
+
 
     </script>
 </body>

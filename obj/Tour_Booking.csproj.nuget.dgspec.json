@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/nhan/Documents/Zalo Received Files/Tour_Booking/Tour_Booking.csproj": {}
+    "C:\\Users\\khoam\\Desktop\\Travele\\Traveleka\\Tour_Booking.csproj": {}
   },
   "projects": {
-    "/Users/nhan/Documents/Zalo Received Files/Tour_Booking/Tour_Booking.csproj": {
+    "C:\\Users\\khoam\\Desktop\\Travele\\Traveleka\\Tour_Booking.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nhan/Documents/Zalo Received Files/Tour_Booking/Tour_Booking.csproj",
+        "projectUniqueName": "C:\\Users\\khoam\\Desktop\\Travele\\Traveleka\\Tour_Booking.csproj",
         "projectName": "Tour_Booking",
-        "projectPath": "/Users/nhan/Documents/Zalo Received Files/Tour_Booking/Tour_Booking.csproj",
-        "packagesPath": "/Users/nhan/.nuget/packages/",
-        "outputPath": "/Users/nhan/Documents/Zalo Received Files/Tour_Booking/obj/",
+        "projectPath": "C:\\Users\\khoam\\Desktop\\Travele\\Traveleka\\Tour_Booking.csproj",
+        "packagesPath": "C:\\Users\\khoam\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\khoam\\Desktop\\Travele\\Traveleka\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/nhan/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\khoam\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -83,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

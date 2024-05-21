@@ -11,31 +11,49 @@
     <title>Booking</title>
     <link href="~/lib/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
     <link href="~/css/Home/Booking/Booking.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link href="~/css/Home/Booking/Booking.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/Home/navbar.css">
+    <link rel="stylesheet" href="~/css/Home/slider.css">
+    <link rel="stylesheet" href="~/css/Home/category.css">
+    <link rel="stylesheet" href="~/css/Home/booking.css">
+    <link rel="stylesheet" href="~/css/Home/footer.css">
+    <link rel="stylesheet" href="~/css/Home/maps.css">
+    <link rel="stylesheet" href="~/css/Home/detail.css">
     <script type="module" src="/js/User/User.js"></script>
 </head>
 
 <body>
-    <div class="container-fluid my-5">
+    <div style="margin-top: 145px !important" class="container-fluid my-5">
         <div class="row justify-content-center">
             <div class="col-xl-10">
                 <div class="card shadow-lg">
                     <div class="row mx-auto justify-content-center text-center">
                         <div class="col-12 mt-3">
                             <!-- Nav -->
-                            <nav aria-label="breadcrumb" class="second">
-                                <ol class="breadcrumb indigo lighten-6 first">
-                                    <li class="breadcrumb-item font-weight-bold">
-                                        <a class="black-text text-uppercase" href="/Home"><span
-                                                class="mr-md-3 mr-1">BACK TO HOME</span></a><i
-                                            class="fa fa-angle-double-right" aria-hidden="true"></i>
-                                    </li>
+                            @* <nav aria-label="breadcrumb" class="second">
+                            <ol class="breadcrumb indigo lighten-6 first">
+                            <li class="breadcrumb-item font-weight-bold">
+                            <a class="black-text text-uppercase" href="/Home"><span
+                            class="mr-md-3 mr-1">BACK TO HOME</span></a><i
+                            class="fa fa-angle-double-right" aria-hidden="true"></i>
+                            </li>
 
-                                    <li class="breadcrumb-item font-weight-bold">
-                                        <a class="black-text text-uppercase active-2" href="#"><span
-                                                class="mr-md-3 mr-1">BOOKING</span></a>
-                                    </li>
-                                </ol>
-                            </nav>
+                            <li class="breadcrumb-item font-weight-bold">
+                            <a class="black-text text-uppercase active-2" href="#"><span
+                            class="mr-md-3 mr-1">BOOKING</span></a>
+                            </li>
+                            </ol>
+                            </nav> *@
                         </div>
                     </div>
 
@@ -78,8 +96,8 @@
                                                         <div class="media d-flex flex-row">
                                                             @if (Model[i].Tour.Assets.Count != 0)
                                                             {
-                                                                <img class="img-fluid" src="@Model[i].Tour.Assets[0].Url" width="62"
-                                                                    height="62" />
+                                                                <img class="img-fluid" src="/@Model[i].Tour.Assets[0].Url"
+                                                                    width="62" height="62" />
                                                             }
 
                                                             <div class="media-body my-auto" style="
@@ -90,7 +108,8 @@
                                                                 <div class="row">
                                                                     <div class="col">
                                                                         <p class="mb-0"><b>@Model[i].Tour.Name</b></p>
-                                                                        <small class="text-muted">@Model[i].TravelDate</small>
+                                                                        <small
+                                                                            class="text-muted">@Model[i].TravelDate.ToString("yyyy-MM-dd")</small>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -141,7 +160,7 @@
                                                 <div class="media d-flex flex-row">
                                                     @if (Model[0].Tour.Assets.Count != 0)
                                                     {
-                                                        <img id="tourImg" class="img-fluid" src="@Model[0].Tour.Assets[0].Url"
+                                                        <img id="tourImg" class="img-fluid" src="/@Model[0].Tour.Assets[0].Url"
                                                             width="62" height="62" />
                                                     }
 
@@ -151,12 +170,12 @@
                                                             white-space: nowrap;
                                                             overflow: hidden;
                                                             text-overflow: ellipsis;
-                                                                                                                                                                            ">
+                                                                                                                                                                                        ">
                                                         <div class="row">
                                                             <div class="col">
                                                                 <p class="mb-0"><b id="tourName">@Model[0].Tour.Name</b></p>
                                                                 <small id="tourTravelDate"
-                                                                    class="text-muted">@Model[0].TravelDate</small>
+                                                                    class="text-muted">@Model[0].TravelDate.ToString("yyyy-MM-dd")</small>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -164,7 +183,7 @@
                                             </div>
 
                                             <div class="pl-0 flex-sm-col col-auto my-auto">
-                                                <p><b id="tourPrice">@Model[0].Tour.Price</b></p>
+                                                <p><b id="tourPrice">@Model[0].Tour.Price $</b></p>
                                             </div>
                                         </div>
                                         <hr class="my-2" />
@@ -175,7 +194,7 @@
                                                         <p class="mb-1"><b>Subtotal</b></p>
                                                     </div>
                                                     <div class="flex-sm-col col-auto">
-                                                        <p class="mb-1"><b id="bookingPayment">@Model[0].Payment $</b></p>
+                                                        <p class="mb-1"><b id="bookingPayment">0 $</b></p>
                                                     </div>
                                                 </div>
 
@@ -204,7 +223,6 @@
         let model = @Html.Raw(Json.Serialize(Model))
             document.getElementById(`booking_0`).style.backgroundColor = "#e1e3e6"
         function selectBooking(index) {
-            console.log(index)
             let bookingItem = document.getElementsByClassName("bookingItem");
             for (let i = 0; i < bookingItem.length; i++) {
                 if (i == index) {

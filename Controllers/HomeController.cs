@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Tour_Booking.Data;
@@ -19,57 +20,121 @@ public class HomeController : Controller
     {
         try
         {
-            _logger.LogInformation("Start Render Home Page");
-            List<Tour> mostBookingInteriorTours = await dbContext.Tours
-                            .Include(x => x.Assets)
-                            .Where(x => x.Destination.IsInterior)
-                            .OrderByDescending(x => x.BookingNumber)
-                            .Take(5)
-                            .ToListAsync();
-
-            var destinationIds = mostBookingInteriorTours.Select(d => d.DestinationId).Distinct().ToList();
-            List<Destination> interiorDestinations = await dbContext.Destinations
-                                        .Where(d => destinationIds.Contains(d.Id))
-                                        .Take(3)
-                                        .ToListAsync();
-
-            List<Tour> aboardTours = await dbContext.Tours
-                                        .Include(x => x.Assets)
-                                        .Where(x => x.Destination.IsInterior == false)
-                                        .Take(5)
-                                        .ToListAsync();
-
-            List<Destination> aboardDestinations = await dbContext.Destinations
-                                                        .Where(d => d.IsInterior == false)
-                                                        .Take(3)
-                                                        .ToListAsync();
-
-            if (interiorDestinationId == Guid.Empty || interiorDestinationId == null)
+            string currentUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}{Request.Path}{Request.QueryString}";
+            Uri uri = new Uri(currentUrl);
+            String search = HttpUtility.ParseQueryString(uri.Query).Get("search");
+            String order = HttpUtility.ParseQueryString(uri.Query).Get("order");
+            if (search != null)
             {
-                var interiorDestinationFirstEntry = interiorDestinations.Take(1).FirstOrDefault();
-                if (interiorDestinationFirstEntry != null)
+                List<Tour> orderTours = await dbContext.Tours.Include(x => x.Assets)
+                                .Include(x => x.Destination)
+                                .OrderByDescending(x => x.BookingNumber)
+                                .Where(x => x.Name.ToLower().Contains(search.ToLower()))
+                                .ToListAsync();
+                return View(new HomeViewModel
                 {
-                    interiorDestinationId = interiorDestinationFirstEntry.Id;
+                    OrderTours = orderTours,
+                    Action = "search"
+                });
+            }
+
+            if (order == null)
+            {
+                _logger.LogInformation("Start Render Home Page");
+                List<Tour> mostBookingInteriorTours = await dbContext.Tours
+                                .Include(x => x.Assets)
+                                .Where(x => x.Destination.IsInterior)
+                                .OrderByDescending(x => x.BookingNumber)
+                                .Take(5)
+                                .ToListAsync();
+
+                var destinationIds = mostBookingInteriorTours.Select(d => d.DestinationId).Distinct().ToList();
+                List<Destination> interiorDestinations = await dbContext.Destinations
+                                            .Where(d => destinationIds.Contains(d.Id))
+                                            .Take(3)
+                                            .ToListAsync();
+
+                List<Tour> aboardTours = await dbContext.Tours
+                                            .Include(x => x.Assets)
+                                            .Where(x => x.Destination.IsInterior == false)
+                                            .Take(5)
+                                            .ToListAsync();
+
+                List<Destination> aboardDestinations = await dbContext.Destinations
+                                                            .Where(d => d.IsInterior == false)
+                                                            .Take(3)
+                                                            .ToListAsync();
+
+                if (interiorDestinationId == Guid.Empty || interiorDestinationId == null)
+                {
+                    var interiorDestinationFirstEntry = interiorDestinations.Take(1).FirstOrDefault();
+                    if (interiorDestinationFirstEntry != null)
+                    {
+                        interiorDestinationId = interiorDestinationFirstEntry.Id;
+                    }
+                }
+
+                List<Tour> mostBookingInteriorTourByDestination = await dbContext.Tours
+                                .Include(x => x.Assets)
+                                .Where(x => x.Destination.IsInterior && x.Destination.Id == interiorDestinationId)
+                                .OrderByDescending(x => x.BookingNumber)
+                                .Take(5)
+                                .ToListAsync(); ;
+
+                _logger.LogInformation("End Render Home Page");
+
+                HomeViewModel homeViewModel = new HomeViewModel()
+                {
+                    mostBookingInteriorTours = mostBookingInteriorTourByDestination,
+                    aboardTours = aboardTours,
+                    interiorDestinations = interiorDestinations,
+                    aboardDestinations = aboardDestinations
+                };
+                return View(homeViewModel);
+            }
+            else
+            {
+                switch (order)
+                {
+                    case "MBT":
+                        List<Tour> MBTTours = await dbContext.Tours
+                                .Include(x => x.Assets)
+                                .Include(x => x.Destination)
+                                .OrderByDescending(x => x.BookingNumber)
+                                .ToListAsync();
+                        return View(new HomeViewModel
+                        {
+                            OrderTours = MBTTours,
+                            Action = "MBT"
+                        });
+                    case "IT":
+                        List<Tour> ITTours = await dbContext.Tours
+                                    .Include(x => x.Assets)
+                                    .Where(x => x.Destination.IsInterior)
+                                    .OrderByDescending(x => x.BookingNumber)
+                                    .ToListAsync();
+                        return View(new HomeViewModel
+                        {
+                            OrderTours = ITTours,
+                            Action = "IT"
+                        });
+                    case "AT":
+                        List<Tour> ATTours = await dbContext.Tours
+                                       .Include(x => x.Assets)
+                                       .Where(x => x.Destination.IsInterior == false)
+                                       .OrderByDescending(x => x.BookingNumber)
+                                       .ToListAsync();
+                        return View(new HomeViewModel
+                        {
+                            OrderTours = ATTours,
+                            Action = "AT"
+                        });
+                    default:
+                        return Redirect("/");
                 }
             }
 
-            List<Tour> mostBookingInteriorTourByDestination =  await dbContext.Tours
-                            .Include(x => x.Assets)
-                            .Where(x => x.Destination.IsInterior && x.Destination.Id == interiorDestinationId)
-                            .OrderByDescending(x => x.BookingNumber)
-                            .Take(5)
-                            .ToListAsync();;
 
-            _logger.LogInformation("End Render Home Page");
-
-
-            return View(new HomeViewModel
-            {
-                mostBookingInteriorTours = mostBookingInteriorTourByDestination,
-                aboardTours = aboardTours,
-                interiorDestinations = interiorDestinations,
-                aboardDestinations = aboardDestinations
-            });
         }
         catch (Exception e)
         {
@@ -109,9 +174,24 @@ public class HomeController : Controller
     }
 
     [HttpGet]
-    public IActionResult Booking()
+    public async Task<IActionResult> Booking(Guid TourId, DateTime TravelDate)
     {
-        return View();
+        if (TourId == null || TravelDate == null)
+        {
+            return RedirectToAction("Index");
+        }
+
+        Tour tour = await dbContext.Tours.Include(x => x.Destination).Include(x => x.Assets).Where(x => x.Id == TourId).FirstOrDefaultAsync();
+        if (tour == null)
+        {
+            return RedirectToAction("Index");
+        }
+        BookingFormModel bookingFormModel = new BookingFormModel()
+        {
+            Tour = tour,
+            TravelDate = TravelDate
+        };
+        return View(bookingFormModel);
     }
 
     [HttpPost]
@@ -140,8 +220,7 @@ public class HomeController : Controller
         await dbContext.Bookings.AddAsync(booking);
         await dbContext.SaveChangesAsync();
         TempData["SuccessMessage"] = "Booking Successfully!";
-
-        return View();
+        return RedirectToAction("Index", "Home");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

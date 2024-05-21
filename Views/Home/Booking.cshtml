@@ -39,18 +39,18 @@
                         <div class="col-12 mt-3">
                             <!-- Nav -->
                             @* <nav aria-label="breadcrumb" class="second">
-                                <ol class="breadcrumb indigo lighten-6 first">
-                                    <li class="breadcrumb-item font-weight-bold">
-                                        <a class="black-text text-uppercase" href="#"><span class="mr-md-3 mr-1">BACK TO
-                                                HOME</span></a><i class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i>
-                                    </li>
+                            <ol class="breadcrumb indigo lighten-6 first">
+                            <li class="breadcrumb-item font-weight-bold">
+                            <a class="black-text text-uppercase" href="#"><span class="mr-md-3 mr-1">BACK TO
+                            HOME</span></a><i class="fa fa-angle-double-right"
+                            aria-hidden="true"></i>
+                            </li>
 
-                                    <li class="breadcrumb-item font-weight-bold">
-                                        <a class="black-text text-uppercase active-2" href="#"><span
-                                                class="mr-md-3 mr-1">BOOKING</span></a>
-                                    </li>
-                                </ol>
+                            <li class="breadcrumb-item font-weight-bold">
+                            <a class="black-text text-uppercase active-2" href="#"><span
+                            class="mr-md-3 mr-1">BOOKING</span></a>
+                            </li>
+                            </ol>
                             </nav> *@
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                                             <button type="submit" name="" id="" class="btn btn-lg btn-block"
                                                 style="margin-top: 10px; width: 100%;" asp-controller="Home"
                                                 asp-action="Booking">
-                                                PURCHASE $37 SEK
+                                                PURCHASE @Model.Tour.Price$
                                             </button>
                                         </div>
                                     </div>
@@ -126,10 +126,11 @@
                                     <div class="row justify-content-between">
                                         <!-- Booking Options -->
                                         <div class="col-12 d-flex align-items-center mt-0">
-                                            <label class="switch">
-                                                <input id="bookingOptionCheckbox" type="checkbox" />
-                                                <span class="slider round"></span>
-                                            </label>
+                                            @* <label class="switch">
+                                            <input id="bookingOptionCheckbox" type="checkbox" />
+                                            <span class="slider round"></span>
+                                            </label> *@
+                                            <input id="bookingOptionCheckbox" type="checkbox" />
                                             <p style="padding-top: 1rem; padding-left: 0.5rem;">
                                                 <b>Booking for another person</b>
                                             </p>
@@ -159,14 +160,16 @@
                                     <div class="row justify-content-between">
                                         <div class="col-auto col-md-7">
                                             <div class="media d-flex flex-sm-row">
-                                                <img class="img-fluid" src="https://i.imgur.com/6oHix28.jpg" width="62"
-                                                    height="62" />
+                                                <img class="img-fluid" src="/@Model.Tour.Assets[0].Url" width="62"
+                                                    height="62" style="margin-right: 1rem;" />
                                                 <div class="media-body my-auto">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <p class="mb-0"><b>EC-GO Bag Standard</b></p>
-                                                            <small class="text-muted">2024/05/19</small>
-                                                            <input type="datetime" value="2024/05/19"
+                                                            <p class="mb-0"><b>@Model.Tour.Name</b></p>
+                                                            <small
+                                                                class="text-muted">@Model.TravelDate.ToString("yyyy-MM-dd")</small>
+                                                            <input type="datetime"
+                                                                value="@Model.TravelDate.ToString("yyyy-MM-dd")"
                                                                 asp-for="TravelDate" hidden>
                                                         </div>
                                                     </div>
@@ -175,7 +178,7 @@
                                         </div>
 
                                         <div class="pl-0 flex-sm-col col-auto my-auto">
-                                            <p><b>179 SEK</b></p>
+                                            <p><b>@Model.Tour.Price $</b></p>
                                         </div>
                                     </div>
                                     <hr class="my-2" />
@@ -195,15 +198,15 @@
                                                     <p><b>Total</b></p>
                                                 </div>
                                                 <div class="flex-sm-col col-auto">
-                                                    <p class="mb-1"><b>537 $</b></p>
-                                                    <input type="number" value="537" hidden asp-for="Payment">
+                                                    <p class="mb-1"><b>@Model.Tour.Price $</b></p>
+                                                    <input type="number" value="@Model.Tour.Price" hidden
+                                                        asp-for="Payment">
                                                 </div>
                                             </div>
                                             <hr class="my-0" />
-                                            <input type="text" value="EAC035D5-322E-408A-8A19-08DC724E2534" hidden
-                                                asp-for="UserId">
-                                            <input type="text" value="24838F5E-F55C-457C-A3FA-449514AD7789" hidden
-                                                asp-for="TourId">
+                                            <input id="UserId" type="text" value="EAC035D5-322E-408A-8A19-08DC724E2534"
+                                                hidden asp-for="UserId">
+                                            <input type="text" value="@Model.Tour.Id" hidden asp-for="TourId">
                                         </div>
                                     </div>
                                 </div>
@@ -218,15 +221,30 @@
         let bookingOptionCheckbox = document.getElementById("bookingOptionCheckbox");
         let customerName = document.getElementById("CustomerName")
         let phoneNumber = document.getElementById("PhoneNumber")
+        let userId = document.getElementById("UserId")
+        window.onload = () => {
+            let currentUserJson = localStorage.getItem("currentUser");
+            if (currentUserJson) {
+                let currentUser = JSON.parse(currentUserJson);
+                userId.value = currentUser.Id
+                customerName.value = currentUser.FullName;
+                phoneNumber.value = currentUser.PhoneNumber;
+            } else {
+                location.href("/")
+            }
+        }
         bookingOptionCheckbox.addEventListener("change", (e) => {
             let checkboxState = e.target.checked;
             if (checkboxState) {
                 customerName.value = "";
                 phoneNumber.value = "";
             } else {
-                let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-                customerName.value = currentUser.FullName;
-                phoneNumber.value = currentUser.phoneNumber;
+                let currentUserJson = localStorage.getItem("currentUser");
+                if (currentUserJson) {
+                    let currentUser = JSON.parse(currentUserJson);
+                    customerName.value = currentUser.FullName;
+                    phoneNumber.value = currentUser.PhoneNumber;
+                }
             }
         })
     </script>

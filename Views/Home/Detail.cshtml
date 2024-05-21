@@ -1,7 +1,16 @@
 @{
   ViewData["Title"] = Model.tour.Name;
+
+
+
   var request = Context.Request;
+
+
+
   var path = request.Path;
+
+
+
   var queryString = request.QueryString;
   @* var currentUrl = $"{request.Scheme}://{request.Host}{request.Path}{request.QueryString}"; *@
 }
@@ -39,16 +48,17 @@
   <!-- Slider -->
   <section class="slider container">
     <div style="background-image: url('/assets/const_img/slider.webp')" class="slider-img"></div>
-    <div class="slider-search-container">
+    <form method="get" class="slider-search-container">
       <div class="input-group slider-search">
         <span class="input-group-text" id="inputGroup-sizing-default">
           <i class="fa-solid fa-magnifying-glass"></i>
         </span>
-        <input type="text" class="form-control" aria-label="Sizing example input"
+        <input name="search" type="text" class="form-control" aria-label="Sizing example input"
           placeholder="Bạn có ý tưởng gì cho chuyến đi tiếp theo?" aria-describedby="inputGroup-sizing-default">
       </div>
-      <button class="btn btn-primary slider-btn">Tìm kiếm</button>
-    </div>
+      <button asp-controller="Home" asp-action="Index" type="submit" class="btn btn-primary slider-btn">Tìm
+        kiếm</button>
+    </form>
 
   </section>
   <!-- Slider -->
@@ -84,20 +94,300 @@
         <div style="" class="detail-images-right">
           <div style="margin:0" class="row">
             @foreach (var image in @Model.tour.Assets)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             {
-              if (Model.tour.Assets.IndexOf(image) == 0 || Model.tour.Assets.IndexOf(image) > 4) continue;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               if (Model.tour.Assets.IndexOf(image) < 3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               {
                 <div class="col-6 mb-3">
                   <img class="w-full h-full" src="~/@image.Url" alt="">
                 </div>
               }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               else
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               {
                 <div class="col-6 ">
                   <img class="w-full h-full" src="~/@image.Url" alt="">
                 </div>
               }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             }
 
@@ -120,17 +410,31 @@
             </p>
           </div>
         </div>
-        <div class="detail-description-price">
+        <form method="get" class="detail-description-price">
           <div class="detail-description-price-container">
             <div>
               <p>Bắt đầu từ</p>
               <h2>@string.Format("{0:C}", Model.tour.Price) VND</h2>
             </div>
             <div class="detail-description-price-container-submit">
-              <a href="/Home/Booking" class="btn btn-warning detail-description-price-container-submit-btn">Tìm tour</a>
+              <button type="submit" asp-controller="Home" asp-action="Booking"
+                class="btn btn-warning detail-description-price-container-submit-btn">Đặt
+                chỗ</button>
+              <input type="text" hidden value="@Model.tour.Id" name="TourId">
             </div>
           </div>
-        </div>
+          <div class="booking-datepicker">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Chọn lịch</span>
+              </div>
+              <input name="TravelDate" value="@DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")" type="date"
+                class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")"
+                max="@DateTime.Today.AddDays(120).ToString("yyyy-MM-dd")">
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </section>
@@ -138,64 +442,64 @@
 
   <!-- Booking -->
   @* <section class="booking">
-    <div class="booking-container container">
-      <div class="booking-section">
-        <h4>Có vé trống cho bạn</h4>
-        <div class="booking-datepicker">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-default">Xem lịch</span>
-            </div>
-            <input value="@Model.tour.LastestDate.ToString("yyyy-MM-dd")" type="date" class="form-control"
-              aria-label="Default" aria-describedby="inputGroup-sizing-default">
-          </div>
-        </div>
-        <div class="booking-list">
-          <div class="booking-item">
-            <div class="booking-item-info">
-              <h4>Tour ghép - Khởi hành từ Hà Nội bằng xe buýt</h4>
-              <p>
-                <i class="fa-solid fa-money-bill-wave"></i>
-                <span>Easy Refund</span>
-              </p>
-            </div>
-            <div class="booking-item-action">
-              <h3>708.000 VND</h3>
-              <button class="btn btn-primary">Chọn vé</button>
-            </div>
-          </div>
+  <div class="booking-container container">
+  <div class="booking-section">
+  <h4>Có vé trống cho bạn</h4>
+  <div class="booking-datepicker">
+  <div class="input-group mb-3">
+  <div class="input-group-prepend">
+  <span class="input-group-text" id="inputGroup-sizing-default">Xem lịch</span>
+  </div>
+  <input value="@Model.tour.LastestDate.ToString("yyyy-MM-dd")" type="date" class="form-control"
+  aria-label="Default" aria-describedby="inputGroup-sizing-default">
+  </div>
+  </div>
+  <div class="booking-list">
+  <div class="booking-item">
+  <div class="booking-item-info">
+  <h4>Tour ghép - Khởi hành từ Hà Nội bằng xe buýt</h4>
+  <p>
+  <i class="fa-solid fa-money-bill-wave"></i>
+  <span>Easy Refund</span>
+  </p>
+  </div>
+  <div class="booking-item-action">
+  <h3>708.000 VND</h3>
+  <button class="btn btn-primary">Chọn vé</button>
+  </div>
+  </div>
 
-          <div class="booking-item">
-            <div class="booking-item-info">
-              <h4>Tour ghép - Khởi hành từ Hà Nội bằng xe buýt</h4>
-              <p>
-                <i class="fa-solid fa-money-bill-wave"></i>
-                <span>Easy Refund</span>
-              </p>
-            </div>
-            <div class="booking-item-action">
-              <h3>708.000 VND</h3>
-              <button class="btn btn-primary">Chọn vé</button>
-            </div>
-          </div>
+  <div class="booking-item">
+  <div class="booking-item-info">
+  <h4>Tour ghép - Khởi hành từ Hà Nội bằng xe buýt</h4>
+  <p>
+  <i class="fa-solid fa-money-bill-wave"></i>
+  <span>Easy Refund</span>
+  </p>
+  </div>
+  <div class="booking-item-action">
+  <h3>708.000 VND</h3>
+  <button class="btn btn-primary">Chọn vé</button>
+  </div>
+  </div>
 
-          <div class="booking-item">
-            <div class="booking-item-info">
-              <h4>Tour ghép - Khởi hành từ Hà Nội bằng xe buýt</h4>
-              <p>
-                <i class="fa-solid fa-money-bill-wave"></i>
-                <span>Easy Refund</span>
-              </p>
-            </div>
-            <div class="booking-item-action">
-              <h3>708.000 VND</h3>
-              <button class="btn btn-primary">Chọn vé</button>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="booking-item">
+  <div class="booking-item-info">
+  <h4>Tour ghép - Khởi hành từ Hà Nội bằng xe buýt</h4>
+  <p>
+  <i class="fa-solid fa-money-bill-wave"></i>
+  <span>Easy Refund</span>
+  </p>
+  </div>
+  <div class="booking-item-action">
+  <h3>708.000 VND</h3>
+  <button class="btn btn-primary">Chọn vé</button>
+  </div>
+  </div>
+  </div>
+  </div>
 
-    </div>
+  </div>
   </section> *@
   <!-- Booking -->
 
@@ -205,10 +509,10 @@
       <div class="maps-section">
         <h4>Thông tin địa điểm</h4>
         @* <p>
-          <i class="fa-solid fa-location-dot"></i>
-          <span>
-            Xã, Gia Sinh, Gia Viễn, Ninh Bình, Vietnam
-          </span>
+        <i class="fa-solid fa-location-dot"></i>
+        <span>
+        Xã, Gia Sinh, Gia Viễn, Ninh Bình, Vietnam
+        </span>
         </p> *@
         <div class="w-full ">
           @Html.Raw(Model.tour.Iframe)

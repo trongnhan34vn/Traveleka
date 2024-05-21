@@ -8,6 +8,29 @@
     @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
     @* <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
     @* <link rel="stylesheet" href="~/Tour_Booking.styles.css" asp-append-version="true" /> *@
+    <link rel="icon" type="image/png" href="~/assets/const_img/logo.png" sizes="32x32">
+    <style>
+        #userDropdownItems {
+            position: absolute;
+            height: 0;
+            background-color: white;
+            overflow: hidden;
+            transition-property: all;
+        }
+
+        #userDropdown {
+            cursor: pointer;
+        }
+
+        #userDropdown:hover #userDropdownItems {
+            height: auto;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgb(196, 192, 192) !important;
+        }
+    </style>
+    <script type="module" src="/js/Navbar.js" asp-append-version="true"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -25,26 +48,50 @@
                 </div>
                 <div class="" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link active nav-item nav-item__discount" aria-current="page" href="#">
-                            <i class="fa-solid fa-percent"></i>
-                            <span>Khuyến mãi</span>
-                        </a>
-                        <a class="nav-link nav-item" href="#">Hợp tác với chúng tôi</a>
-                        <a class="nav-link nav-item" href="#">Đặt chỗ của tôi</a>
-                        <a href="/User/Member?action=SignIn" class="btn btn-outline-primary nav-item">
-                            <i class="fa-solid fa-user"></i>
-                            <span>Đăng nhập</span>
-                        </a>
-                        <a href="/User/Member?action=SignUp" class="btn btn-primary">Đăng kí</a>
+                        <div id="signInUpBtn" style="display: block;">
+                            <a href="/User/Member?action=SignIn" class="btn btn-outline-primary nav-item">
+                                <i class="fa-solid fa-user"></i>
+                                <span>Đăng nhập</span>
+                            </a>
+                            <a href="/User/Member?action=SignUp" class="btn btn-primary">Đăng kí</a>
+                        </div>
+                        <li id="userDropdown" class="nav-item no-arrow" style="display: none;">
+                            <div class=" nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <span id="displayName" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                                <img class="rounded-circle" style="height: 2rem; width: 2rem;"
+                                    src="https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png?ssl=1" />
+                            </div>
+                            <!-- Dropdown - User Information -->
+                            <div id="userDropdownItems" class="shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <p id="profileBtn" class="dropdown-item"
+                                    style="padding-left: 2rem; padding-right: 2rem; padding-top: 0.5rem;">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Hồ sơ
+                                </p>
+                                <hr>
+                                <p id="bookingTour" class="dropdown-item" data-toggle="modal" data-target="#logoutModal"
+                                    style="padding-left: 2rem; padding-right: 2rem;">
+                                    <i class="fas fa-calendar fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Tour đã đặt
+                                </p>
+                                <hr>
+                                <p id="signOutBtn" class="dropdown-item" data-toggle="modal" data-target="#logoutModal"
+                                    style="padding-left: 2rem; padding-right: 2rem;">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Sign Out
+                                </p>
+                            </div>
+                        </li>
                     </div>
                 </div>
             </div>
             <div class="nav-route-container nav-container">
                 <div class="nav-route-container-list">
-                    <a class="nav-route-item" href="">Tất cả</a>
-                    <a class="nav-route-item" href="">Tour bán chạy</a>
-                    <a class="nav-route-item" href="">Tour nội địa</a>
-                    <a class="nav-route-item" href="">Tour nước ngoài</a>
+                    <a class="nav-route-item" href="/">Tất cả</a>
+                    <a class="nav-route-item" href="/Home?order=MBT">Tour bán chạy</a>
+                    <a class="nav-route-item" href="/Home?order=IT">Tour nội địa</a>
+                    <a class="nav-route-item" href="/Home?order=AT">Tour nước ngoài</a>
                 </div>
 
             </div>
@@ -133,7 +180,7 @@
     <!-- Footer -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

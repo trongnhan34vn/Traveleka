@@ -688,12 +688,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\6b78640c-f069-4c06-a8be-2ad0c432a2a7guide to phu quoc-13.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\6c5ef3ba-e42a-4ca0-9e71-e5051f00dabcVườn Thú Safari và Công Viên Nước Bali.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\6c5ef3ba-e42a-4ca0-9e71-e5051f00dabcVườn Thú Safari và Công Viên Nước Bali.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Tour_Booking</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Tour_Booking</BasePath>
-      <RelativePath>assets/img/6c5ef3ba-e42a-4ca0-9e71-e5051f00dabcVườn Thú Safari và Công Viên Nước Bali.jpg</RelativePath>
+      <RelativePath>assets/img/6c5ef3ba-e42a-4ca0-9e71-e5051f00dabcVườn Thú Safari và Công Viên Nước Bali.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -702,7 +702,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\6c5ef3ba-e42a-4ca0-9e71-e5051f00dabcVườn Thú Safari và Công Viên Nước Bali.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\6c5ef3ba-e42a-4ca0-9e71-e5051f00dabcVườn Thú Safari và Công Viên Nước Bali.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\6cd2051e-21e7-47b9-978e-13421b969bbbimages.jpeg))">
       <SourceType>Package</SourceType>
@@ -1488,12 +1488,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\de4d38f0-f881-446a-8178-dcc49fe3b4e8tourist-places-in-bangkok5.png))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\e2999270-1796-4022-a29c-a2801c233044Khóa học ngắm cảnh đêm trên xe buýt tham quan thành phố Seoul.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\e2999270-1796-4022-a29c-a2801c233044Khóa học ngắm cảnh đêm trên xe buýt tham quan thành phố Seoul.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Tour_Booking</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Tour_Booking</BasePath>
-      <RelativePath>assets/img/e2999270-1796-4022-a29c-a2801c233044Khóa học ngắm cảnh đêm trên xe buýt tham quan thành phố Seoul.jpg</RelativePath>
+      <RelativePath>assets/img/e2999270-1796-4022-a29c-a2801c233044Khóa học ngắm cảnh đêm trên xe buýt tham quan thành phố Seoul.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -1502,7 +1502,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\e2999270-1796-4022-a29c-a2801c233044Khóa học ngắm cảnh đêm trên xe buýt tham quan thành phố Seoul.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\e2999270-1796-4022-a29c-a2801c233044Khóa học ngắm cảnh đêm trên xe buýt tham quan thành phố Seoul.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\e4becc37-a8b5-4085-a20f-5669c911afa8download.jpeg))">
       <SourceType>Package</SourceType>
@@ -1951,6 +1951,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\js\Dashboard\Dashboard.js))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\js\Navbar.js))">
+      <SourceType>Package</SourceType>
+      <SourceId>Tour_Booking</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Tour_Booking</BasePath>
+      <RelativePath>js/Navbar.js</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\js\Navbar.js))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\js\site.js))">
       <SourceType>Package</SourceType>

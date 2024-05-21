@@ -173,7 +173,7 @@ public class UserController : Controller
     [HttpGet]
     public async Task<IActionResult> Profile(Guid id)
     {
-        var user = await dbContext.Users.FindAsync(id);
+        var user = await dbContext.Users.Include(x => x.Bookings).Where(x => x.Id == id).FirstOrDefaultAsync();
         if (user != null)
         {
             return View(user);
